@@ -1571,6 +1571,8 @@ if(modH->xTypeHW != TCP_HW)
 */
 #if defined(STM32H7)  || defined(STM32F3) || defined(STM32L4) || defined(STM32L082xx) || defined(STM32F7) || defined(STM32WB)
           while((modH->port->Instance->ISR & USART_ISR_TC) ==0 )
+#elif defined(STM32F030xC)
+		  while((modH->port->Instance->ISR & USART_ISR_TC) ==0 )
 #else
           // F429, F103, L152 ...
 	  while((modH->port->Instance->SR & USART_SR_TC) ==0 )
