@@ -21,17 +21,17 @@
 
 typedef enum
 {
-    USART_HW = 1,
-    USB_CDC_HW = 2,
-    TCP_HW = 3,
+	USART_HW = 1,
+	USB_CDC_HW = 2,
+	TCP_HW = 3,
 	USART_HW_DMA = 4,
 }mb_hardware_t ;
 
 
 typedef enum
 {
-    MB_SLAVE = 3,
-    MB_MASTER = 4
+	MB_SLAVE = 3,
+	MB_MASTER = 4
 }mb_masterslave_t ;
 
 
@@ -47,24 +47,24 @@ typedef enum
  */
 typedef enum MB_FC
 {
-    MB_FC_READ_COILS               = 1,	 /*!< FCT=1 -> read coils or digital outputs */
-    MB_FC_READ_DISCRETE_INPUT      = 2,	 /*!< FCT=2 -> read digital inputs */
-    MB_FC_READ_REGISTERS           = 3,	 /*!< FCT=3 -> read registers or analog outputs */
-    MB_FC_READ_INPUT_REGISTER      = 4,	 /*!< FCT=4 -> read analog inputs */
-    MB_FC_WRITE_COIL               = 5,	 /*!< FCT=5 -> write single coil or output */
-    MB_FC_WRITE_REGISTER           = 6,	 /*!< FCT=6 -> write single register */
-    MB_FC_WRITE_MULTIPLE_COILS     = 15, /*!< FCT=15 -> write multiple coils or outputs */
-    MB_FC_WRITE_MULTIPLE_REGISTERS = 16	 /*!< FCT=16 -> write multiple registers */
+	MB_FC_READ_COILS               = 1,	 /*!< FCT=1 -> read coils or digital outputs */
+	MB_FC_READ_DISCRETE_INPUT      = 2,	 /*!< FCT=2 -> read digital inputs */
+	MB_FC_READ_REGISTERS           = 3,	 /*!< FCT=3 -> read registers or analog outputs */
+	MB_FC_READ_INPUT_REGISTER      = 4,	 /*!< FCT=4 -> read analog inputs */
+	MB_FC_WRITE_COIL               = 5,	 /*!< FCT=5 -> write single coil or output */
+	MB_FC_WRITE_REGISTER           = 6,	 /*!< FCT=6 -> write single register */
+	MB_FC_WRITE_MULTIPLE_COILS     = 15, /*!< FCT=15 -> write multiple coils or outputs */
+	MB_FC_WRITE_MULTIPLE_REGISTERS = 16	 /*!< FCT=16 -> write multiple registers */
 }mb_functioncode_t;
 
 
 typedef struct
 {
-uint8_t uxBuffer[MAX_BUFFER];
-uint8_t u8start;
-uint8_t u8end;
-uint8_t u8available;
-bool    overflow;
+	uint8_t uxBuffer[MAX_BUFFER];
+	uint8_t u8start;
+	uint8_t u8end;
+	uint8_t u8available;
+	bool    overflow;
 }modbusRingBuffer_t;
 
 
@@ -77,33 +77,33 @@ bool    overflow;
  */
 typedef enum MESSAGE
 {
-    ID                             = 0, //!< ID field
-    FUNC, //!< Function code position
-    ADD_HI, //!< Address high byte
-    ADD_LO, //!< Address low byte
-    NB_HI, //!< Number of coils or registers high byte
-    NB_LO, //!< Number of coils or registers low byte
-    BYTE_CNT  //!< byte counter
+	ID                             = 0, //!< ID field
+	FUNC, //!< Function code position
+	ADD_HI, //!< Address high byte
+	ADD_LO, //!< Address low byte
+	NB_HI, //!< Number of coils or registers high byte
+	NB_LO, //!< Number of coils or registers low byte
+	BYTE_CNT  //!< byte counter
 }mb_message_t;
 
 typedef enum COM_STATES
 {
-    COM_IDLE                     = 0,
-    COM_WAITING                  = 1,
+	COM_IDLE                     = 0,
+	COM_WAITING                  = 1,
 
 }mb_com_state_t;
 
 typedef enum ERR_LIST
 {
-    ERR_NOT_MASTER                = -1,
-    ERR_POLLING                   = -2,
-    ERR_BUFF_OVERFLOW             = -3,
-    ERR_BAD_CRC                   = -4,
-    ERR_EXCEPTION                 = -5,
-    ERR_BAD_SIZE                  = -6,
-    ERR_BAD_ADDRESS               = -7,
-    ERR_TIME_OUT		          = -8,
-    ERR_BAD_SLAVE_ID		      = -9,
+	ERR_NOT_MASTER                = -1,
+	ERR_POLLING                   = -2,
+	ERR_BUFF_OVERFLOW             = -3,
+	ERR_BAD_CRC                   = -4,
+	ERR_EXCEPTION                 = -5,
+	ERR_BAD_SIZE                  = -6,
+	ERR_BAD_ADDRESS               = -7,
+	ERR_TIME_OUT		          = -8,
+	ERR_BAD_SLAVE_ID		      = -9,
 	ERR_BAD_TCP_ID		          = -10,
 	ERR_OK_QUERY				  = -11
 
@@ -111,10 +111,10 @@ typedef enum ERR_LIST
 
 enum
 {
-    EXC_FUNC_CODE = 1,
-    EXC_ADDR_RANGE = 2,
-    EXC_REGS_QUANT = 3,
-    EXC_EXECUTE = 4
+	EXC_FUNC_CODE = 1,
+	EXC_ADDR_RANGE = 2,
+	EXC_REGS_QUANT = 3,
+	EXC_EXECUTE = 4
 };
 
 typedef union {
@@ -138,16 +138,16 @@ typedef union {
  */
 typedef struct
 {
-    uint8_t u8id;          /*!< Slave address between 1 and 247. 0 means broadcast */
-    mb_functioncode_t u8fct;         /*!< Function code: 1, 2, 3, 4, 5, 6, 15 or 16 */
-    uint16_t u16RegAdd;    /*!< Address of the first register to access at slave/s */
-    uint16_t u16CoilsNo;   /*!< Number of coils or registers to access */
-    uint16_t *u16reg;     /*!< Pointer to memory image in master */
-    uint32_t *u32CurrentTask; /*!< Pointer to the task that will receive notifications from Modbus */
+	uint8_t u8id;          /*!< Slave address between 1 and 247. 0 means broadcast */
+	mb_functioncode_t u8fct;         /*!< Function code: 1, 2, 3, 4, 5, 6, 15 or 16 */
+	uint16_t u16RegAdd;    /*!< Address of the first register to access at slave/s */
+	uint16_t u16CoilsNo;   /*!< Number of coils or registers to access */
+	uint16_t *u16reg;     /*!< Pointer to memory image in master */
+	uint32_t *u32CurrentTask; /*!< Pointer to the task that will receive notifications from Modbus */
 #if ENABLE_TCP ==1
-    uint32_t   xIpAddress;
-    uint16_t u16Port;
-    uint8_t  u8clientID;
+	uint32_t   xIpAddress;
+	uint16_t u16Port;
+	uint8_t  u8clientID;
 #endif
 }
 modbus_t;
@@ -224,9 +224,9 @@ modbusHandler_t;
 
 enum
 {
-    RESPONSE_SIZE = 6,
-    EXCEPTION_SIZE = 3,
-    CHECKSUM_SIZE = 2
+	RESPONSE_SIZE = 6,
+	EXCEPTION_SIZE = 3,
+	CHECKSUM_SIZE = 2
 };
 
 
@@ -280,7 +280,7 @@ void setID( uint8_t u8id ); //!<write new ID for the slave
 void setTxendPinOverTime( uint32_t u32overTime );
 void ModbusEnd(); //!<finish any communication and release serial communication port
 
-*/
+ */
 
 
 
